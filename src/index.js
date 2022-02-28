@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Put Semantic UI  above css to override css styles
+import 'semantic-ui-css/semantic.min.css'
 import './app/layout/styles.css'
 import App from './app/layout/App.js';
 import reportWebVitals from './reportWebVitals';
 
-// set up for hot module replacement.
-// stops a full page reload
+
 
 const rootElement = document.getElementById('root');
 
