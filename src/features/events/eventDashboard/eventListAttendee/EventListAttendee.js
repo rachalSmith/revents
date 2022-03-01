@@ -1,12 +1,13 @@
 import React from 'react';
 import { List, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 
-function EventListAttendee() {
+function EventListAttendee({ attendee }) {
   return (
     <>
       <List.Item>
-        <Image size='mini' circular src='/assets/user.png' alt='attendee user image'/>
+        <Image size='mini' circular src={attendee.photoURL} alt='attendee user image'/>
       </List.Item>
     </>
 
@@ -14,3 +15,8 @@ function EventListAttendee() {
 }
 
 export default EventListAttendee;
+
+
+EventListAttendee.propTypes = {
+  attendee : PropTypes.object.isRequired
+}

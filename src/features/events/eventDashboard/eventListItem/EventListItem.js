@@ -1,20 +1,22 @@
 import React from 'react';
 import { Button, Icon, Item, List, Segment } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+
 import EventListAttendee from '../eventListAttendee/EventListAttendee';
 
 
-function EventListItem() {
+function EventListItem({ event }) {
   return (
       <>
       <Segment.Group>
           <Segment>
               <Item.Group>
                   <Item>
-                      <Item.Image size='tiny' circular src='/assets/user.png' alt='user image' />
+                      <Item.Image size='tiny' circular src={event.hostPhotoURL} alt='host image' />
                       <Item.Content>
-                          <Item.Header role='heading' content='Event Title' />
+                          <Item.Header role='heading' content={event.title} />
                           <Item.Description>
-                              Hosted by bob
+                              Hosted by {event.hostedBy}
                           </Item.Description>
                       </Item.Content>
                   </Item>
@@ -22,19 +24,21 @@ function EventListItem() {
           </Segment>
           <Segment>
               <span>
-                  <Icon name='clock' /> Date
-                  <Icon name='marker' /> Venue
+                  <Icon name='clock' /> {event.date.toLocaleDateString()}
+                  <Icon name='marker' /> {event.venue.address}
               </span>
           </Segment>
           <Segment secondary>
             <List horizontal>
-                <EventListAttendee />
-                <EventListAttendee />
-                <EventListAttendee />
+                {event.attendees.map(attendee => (
+                 <EventListAttendee key={attendee.id} attendee={attendee} />
+                ))}
+
+
             </List>
           </Segment>
           <Segment clearing>
-              <div>Description of event</div>
+              <div>{event.description}</div>
               <Button color='teal' floated='right' content='View' />
           </Segment>
       </Segment.Group>
@@ -43,3 +47,7 @@ function EventListItem() {
 }
 
 export default EventListItem;
+
+EventListItem.propTypes = {
+    event : PropTypes.object.isRequired
+  }
